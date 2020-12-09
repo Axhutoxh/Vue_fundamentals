@@ -7,33 +7,66 @@
 </head>
 <body>
     <div id="Vue_fundamentals">
-        <h2>{{title.toLocaleUpperCase()}}</h2>
-        <div id="add-task-form">
+        <div class="header">
+            <h2>{{title.toLocaleUpperCase()}}</h2>
+            <button v-if="state === 'default'" class="btn btn-primary" @click=changeState('edit') >Add Task</button>
+            <button v-else class="btn btn-primary" @click=changeState('default')>Cancel Task</button>
+        </div>
+        <div v-if="state ==='edit'" id="add-task-form">
             <input type="text" v-model='newTask' placeholder="Add a task" @keyup.enter=savetask>
-            <button class="btn btn-primary" @click=savetask>Save Item</button>
+            <button class="btn btn-primary" :disabled="newTask.length===0" @click=savetask>Save Item</button>
 
         </div>
         <ul>
-            <li v-for="task in tasks"><h4><i>{{task}}</i></h4></li>
+            <li v-for="task in reversedTask"  :class ="{strikeout: task.purchased}"><h4><i>{{task.label}}</i></h4></li>
         </ul>
+        <p>
+            <li v-if="tasks.length === 0">
+                <strong>
+                    <i>Nice job! You do all Your tasks</i>
+                </strong>
+            </li>
+        </p>
     </div>
 
     <script>
        var todoList = new Vue({
             el : '#Vue_fundamentals',
             data : {
+                state:'default',
                 title : 'To-DO List',
                 newTask:'',
                 tasks:[
-                    'Go to Gym',
-                    'Prepared breakfast ',
-                    'Go to Work',
+                     {
+                        label:'Go to Gym',
+                        purchased:false,
+                        highPriority:false,
+                    },
+                    {
+                        label:'Prepared breakfast',
+                        purchased:true,
+                        highPriority:false,
+                    },
+                    {
+                        label:'Go to Work',
+                        purchased:false,
+                        highPriority:false,
+                    },
                 ]
+            },
+            computed:{
+                reversedTask(){
+                    return this.tasks.slice(0).reverse();
+                }
             },
             methods :{
                 savetask: function(){
-                    this.tasks.push(this.newTask)
-                    this.newTask =''
+                        this.tasks.push(this.newTask)
+                        this.newTask =''
+                },
+                changeState:function(newstate){
+                    this.state=newstate
+                    this.newTask=''
                 }
             }
 
