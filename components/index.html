@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue"></script>
+    <title>Vue_components_fundamentals</title>
+</head>
+<body> 
+    <strong><i><h2>Vue Components basic 2</h2></i></strong>
+    <div id="app">
+        <task-picker></task-picker>
+    </div>
+    <script type="text/x-template" id="task-picker">
+        <div class="tasks">
+            <task v-for="task in tasks" :name="task"></task>
+
+    </div>
+    </script>
+    <script type="text/x-template" id="add_task">
+    
+
+        <div class="task">
+            <strong>
+                <i>
+                    <h4>
+                        {{name}}
+                    </h4>
+                </i>
+            </strong>
+        </div>
+    </script>
+    <script src="app.js"></script>   
+</body>
+</html>

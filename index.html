@@ -18,7 +18,7 @@
 
         </div>
         <ul>
-            <li v-for="task in reversedTask"  :class ="{strikeout: task.purchased}"><h4><i>{{task.label}}</i></h4></li>
+            <li v-for="task in reversedTask"  ><h4><i>{{task}}</i></h4></li>
         </ul>
         <p>
             <li v-if="tasks.length === 0">
@@ -66,7 +66,8 @@
                 },
                 changeState:function(newstate){
                     this.state=newstate
-                    this.newTask=''
+                      this.newTask=''
+                
                 }
             }
 
