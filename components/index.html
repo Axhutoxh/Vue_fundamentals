@@ -13,14 +13,14 @@
     </div>
     <script type="text/x-template" id="task-picker">
         <div class="tasks">
-            <task v-for="task in tasks" :name="task"></task>
+            <task v-for="task in tasks" :name="task" @select="selectTask" :selected-Task='selectedTask'></task>
 
     </div>
     </script>
     <script type="text/x-template" id="add_task">
     
 
-        <div class="task">
+        <div @click="select" class="task" :class="{'active-task':isSelected}" >
             <strong>
                 <i>
                     <h4>
